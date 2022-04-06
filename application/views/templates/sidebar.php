@@ -149,9 +149,9 @@
 
                             <ul class="nav navbar-nav navbar-right">
                                 <li>
-                                    <?php $keranjang = 'Keranjang Belanja: ' .$this->cart->total_items(). 'items'?>
-
-                                    <?php echo $keranjang ?>
+                                    <?php echo anchor('dashboard/detail_keranjang',$keranjang = 'Keranjang Belanja: ' .$this->cart->total_items(). 'items') ?>
+                                    <!-- detail_keranjang : method -->
+                                   
                                 </li>
                             </ul>
 

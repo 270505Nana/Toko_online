@@ -34,6 +34,15 @@ class Dashboard extends CI_Controller{
         // find : untuk mencari id yang diketik user
 
     }
+
+    public function detail_keranjang(){
+
+        $this->load->view('templates/header');
+        $this->load->view('templates/sidebar');
+        $this->load->view('keranjang');
+        $this->load->view('templates/footer');
+        
+    }
 }
 
 ?>

@@ -23,7 +23,7 @@
 
              <!-- Untuk harga -->
              <br>
-            <span class="badge bg-info text-dark mb-3">Rp.<?php echo $brg->harga?></span>
+            <span class="badge bg-info text-dark mb-3">Rp.<?php echo number_format($brg->harga,  0,',','.') ?></span>
 
 
             <?php echo anchor('dashboard/tambah_ke_keranjang/' .$brg->id_brg,'<div class="btn btn-sm btn-primary"> Tambah ke keranjang</div> ' )?>
