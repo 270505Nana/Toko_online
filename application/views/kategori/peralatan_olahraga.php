@@ -9,7 +9,8 @@
 </div>
 
     <div class="row text-center mt-4">
-        <?php foreach($barang as $brg) : ?>
+        <?php foreach($peralatan_olahraga as $brg) : ?>
+            <!-- elektronik : disamakan dengan yang di controller/kategori -->
 
 
             <div class="card ml-3 mb-3" style="width: 16rem;">

@@ -15,13 +15,13 @@ class Model_barang extends CI_Model{
     }
 
     public function tambah_barang($data,$table){
-        $this->db->insert($table,$data);
+        $this->db->insert($table, $data);
     }
 
-    public function edit_barang($where, $table){
+    public function edit_barang($where){
         // $this : querynya
 
-        return $this->db->get_where($table, $where);
+        return $this->db->get_where('tb_barang', $where);
         // Diatas untuk me read data
 
         // Lalu untuk mengedit data
@@ -51,6 +51,16 @@ class Model_barang extends CI_Model{
             return $result->row();
         }else{
             return array();
+        }
+    }
+
+    public function detail_brg($id_brg){
+
+        $result = $this->db->where('id_brg', $id_brg)->get('tb_barang');
+        if($result->num_rows() > 0){
+            return $result->result();
+        }else{
+            return false;
         }
     }
 }

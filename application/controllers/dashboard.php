@@ -1,17 +1,22 @@
 <?php
 
 class Dashboard extends CI_Controller{
-    public function index()
-    {
-        $data['barang'] = $this->model_barang->tampil_data()->result();
-        // tampi_data : nama function yang kita buat
-        // Diatas untuk proses pengambilan datanya
-        $this->load->view('templates/header');
-        $this->load->view('templates/sidebar');
-        $this->load->view('dashboard', $data);
-        $this->load->view('templates/footer');
-        
+
+    public function __construct(){
+        parent::__construct();
+
+        if($this->session->userdata('role_id') != '2'){
+            $this->session->set_flashdata('pesan', ' 
+
+            <div class="alert alert-danger" role="alert">
+            Anda Belum Login
+            </div>');
+
+            redirect('auth/login');
+        }
     }
+
+    
 
     public function tambah_ke_keranjang($id)
     {
@@ -28,7 +33,7 @@ class Dashboard extends CI_Controller{
             
         );
         $this->cart->insert($data);
-        redirect('dashboard');
+        redirect('welcome');
         
         // id_brg : sesuai dengan nama field yang di database
         // find : untuk mencari id yang diketik user
@@ -47,7 +52,7 @@ class Dashboard extends CI_Controller{
     public function hapus_keranjang(){
 
         $this->cart->destroy();
-        redirect('dashboard/index');
+        redirect('welcome');
 
         // setelah menghapus user akan diarahkan ke dashboard/index
     }
@@ -63,14 +68,39 @@ class Dashboard extends CI_Controller{
         // view : foldernya
     }
 
-    public function proses_pesanan(){
+    public function proses(){
+
+        $is_processed = $this->model_invoice->index();
+        if($is_processed){
+        // jadi kalau di proses kita akan load ke halaman dibawah
+        
+
+            $this->cart->destroy();
+            // artinya ketika klik pesan, semua data di keranjang akan dihapus,,
+            $this->load->view('templates/header');
+            $this->load->view('templates/sidebar');
+            $this->load->view('proses_pesanan');
+            $this->load->view('templates/footer');
+
+            // pembayaran : manggil file view yang akan ditampilkan, yang template juga gitu
+            // view : foldernya
+
+        }else{
+            echo"Maaf, Pesanan Anda Gagal di Proses";
+        }
+    }
+
+    public function detail($id_barang){
+
+        $data['barang'] = $this->model_barang->detail_brg($id_barang);
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
-        $this->load->view('proses_pesanan');
+        $this->load->view('detail_barang', $data);
         $this->load->view('templates/footer');
-
     }
+
+    
 }
 
 ?>

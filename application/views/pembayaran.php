@@ -13,11 +13,11 @@
                     }
                 echo " <h4> Total Belanja Anda: Rp. ".number_format($grand_total,0, ',','.');
 
-                }?>
+                ?>
             </div><br>
             <h3>Input Alamat Pengiriman dan Pembayaran</h3>
 
-            <form method="post" action="<?php echo base_url()  ?> dashboard/proses_pesanan">
+            <form method="post" >
         
             <div class="form-group">
                 <label>Nama lengkap</label>
@@ -56,10 +56,21 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-sm btn-primary">Pesan</button>
+            <a href="<?php echo base_url('dashboard/proses') ?>"><div class="btn btn-sm btn-primary">Pesan</div></a>
+            <!--ini membuat button yang jika di klik mengarah ke controller dashboard/proses yang memanggil file view proses_pesanan -->
+
+            <!-- succes : warnanya hijau -->
+            <!-- primary : warnanya biru -->
+            <!-- danger : warnanya merah -->
+    
         
         
             </form>
+            <?php
+                }else{
+                    echo"<h5>Keranjang Belanja Anda Masih Kosong</h5>";
+                }
+            ?>
 
         </div>
 

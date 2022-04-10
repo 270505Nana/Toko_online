@@ -19,7 +19,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="<?php echo base_url('dashboard')?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -39,28 +39,28 @@
 
             <!-- Nav Item - elektronik -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="<?php echo base_url('kategori/elektronik')?>">
                     <i class="fas fa-fw fa-tv"></i>
                     <span>Elektronik</span></a>
             </li>
 
             <!-- Nav Item - Pakaian -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="<?php echo base_url('kategori/pakaian')?>">
                     <i class="fas fa-fw fa-tshirt"></i>
                     <span>Pakaian</span></a>
             </li>
 
             <!-- Nav Item - Alat mandi  -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="<?php echo base_url('kategori/alat_mandi')?>">
                     <i class="fas fa-fw fa-soap"></i>
                     <span>Alat mandi </span></a>
             </li>
 
             <!-- Nav Item - Pakaian Anak -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="<?php echo base_url('kategori/pakaian_anak')?>">
                     <i class="fas fa-fw fa-tshirt"></i>
                     <span>Pakaian Anak</span></a>
             </li>
@@ -68,7 +68,7 @@
             
             <!-- Nav Item - Peralatan olahraga  -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="<?php echo base_url('kategori/peralatan_olahraga')?>">
                     <i class="fas fa-fw fa-futbol"></i>
                     <span>Peralatan Olahraga</span></a>
             </li>
@@ -147,50 +147,38 @@
 
                         <div class="navbar">
 
-                            <ul class="nav navbar-nav navbar-right">
+                            <ul class="nav navbar-nav navbar-right mr-2">
                                 <li>
                                     <?php echo anchor('dashboard/detail_keranjang',$keranjang = 'Keranjang Belanja: ' .$this->cart->total_items(). 'items') ?>
                                     <!-- detail_keranjang : method -->
                                    
                                 </li>
+                            </ul> | 
+                            <!-- Nav Item - User Information -->
+                            <ul class="na navbar-nav navbar-right ml-2">
+                            <?php if($this->session->userdata('username')) { ?>
+                                <li><div class="mr-2"><h7>Selamat Datang</h4> <?php echo $this->session->userdata('username') ?></div></li> | 
+                                <li class="ml-2"><?php echo anchor('auth/logout','logout') ?></li>
+                                
+                                <!-- Artinya kalau sudah login akan muncul selamat datang, dan ada option logout -->
+                                <!-- Nanti mengambil data dari yang didatabase, sesuai dengan yang kita masukin disana -->
+
+                                <?php } else {?>
+                                    <li><?php echo anchor('auth/login', 'Login'); ?></li>
+                                <?php } ?>    
+
                             </ul>
-
-
-
-
-
-                        </div>
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Nana</span>
-                                <img class="img-profile rounded-circle"
-                                    src="assets/img/profil.jpeg">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
                             </div>
-                        </li>
+
+                             
+
+
+
+
+
+                        
+
+                       
 
                     </ul>
 

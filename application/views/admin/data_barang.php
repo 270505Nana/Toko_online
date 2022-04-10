@@ -35,11 +35,15 @@
 
             <td><?php echo $brg->stok ?></td>
 
-            <td><div class="btn btn-success btn-sm"><i class=" fas fa-search-plus"></i></div></td>
-
+            <!-- <td><div class="btn btn-success btn-sm"><i class=" fas fa-search-plus"></i></div></td> -->
+            
+            <td><?php echo anchor('admin/data_barang/detail/' .$brg->id_brg, '<div class="btn btn-success btn-sm"><i class=" fas fa-search-plus"></i></div>')?></td>
+            
             <td><?php echo anchor('admin/data_barang/edit/' .$brg->id_brg, '<div class="btn btn-primary btn-sm"><i class=" fa fa-edit"></i></div>')?></td>
 
             <td><?php echo anchor('admin/data_barang/hapus/' .$brg->id_brg, '<div class="btn btn-danger btn-sm"><i class=" fa fa-trash"></i></div>')?></td>
+
+            
 
         </tr>
         <!-- Ini kalau di run akan error, karena sebelumnya kita belum  memanggil data di controller dan model-->
@@ -61,7 +65,7 @@
 
       <div class="modal-body">
         <form action="<?php echo base_url(). 'admin/data_barang/tambah_aksi'; 
-        ?>" method="post" encytype="multipart/form-data">
+        ?>" method="post" enctype="multipart/form-data">
 <!-- ___________________________________________________________________________________________________________________________________________ -->
  
                                 <!-- FORM UNTUK TAMBAH BARANG -->
@@ -71,13 +75,19 @@
         </div>
 
         <div class="form-group">
-            <label> Keterangan </label>
-            <input type="text" name="keterangan" class="form-control">
+         <label> Keterangan </label><input type="text" name="keterangan" class="form-control">
+            
         </div>
 
         <div class="form-group">
             <label> Kategori </label>
-            <input type="text" name="kategori" class="form-control">
+            <select class="form-control" name="kategori">
+              <option>Elektronik</option>
+              <option>Pakaian</option>
+              <option>Alat Mandi</option>
+              <option>Pakaian Anak</option>
+              <option>Peralatan Olahraga</option>
+            </select>
         </div>
 
         <div class="form-group">
@@ -91,7 +101,7 @@
         </div>
 
         <div class="form-group mb-2">
-            <label> Gambar Produk </label>
+            <label> Gambar Produk </label><br>
             <input type="file" name="gambar" class="form-control">
         </div>
 

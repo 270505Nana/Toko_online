@@ -2,6 +2,21 @@
 
 class Data_barang extends CI_Controller{
 
+    public function __construct(){
+        parent::__construct();
+
+        if($this->session->userdata('role_id') != '1'){
+            $this->session->set_flashdata('pesan', ' 
+
+            <div class="alert alert-danger" role="alert">
+            Anda Belum Login
+            </div>');
+
+            redirect('auth/login');
+        }
+    }
+
+
     public function index(){
 
         $data['barang'] = $this->model_barang->tampil_data()->result();
@@ -20,16 +35,16 @@ class Data_barang extends CI_Controller{
         $kategori     = $this->input->post('kategori');
         $harga        = $this->input->post('harga');
         $stok         = $this->input->post('stok');
-        $gambar       = $_FILES['gambar']['name'];
+        $gambar       = $_FILES['gambar'] ['name']   ;
         if ($gambar=''){}else{
             // bikin path untuk menentukan penyimpanan gambarnya
             $config ['upload_path'] = './uploads';
             //untuk menentukan tipe file yang diijinkan
             $config ['allowed_types'] = 'jpg|jpeg|png|gif';
 
-            //manggil library upload
+            //manggil library upload, karena ingin mengupload file
             $this->load->library('upload', $config);
-            if(!$this->upload->do_upload('gambar_brg')){
+            if(!$this->upload->do_upload('gambar')){
                 echo"Gambar gagal di upload";
             }else{
                 $gambar=$this->upload->data('file_name');
@@ -43,8 +58,10 @@ class Data_barang extends CI_Controller{
             'kategori'      => $kategori,
             'harga'         => $harga,
             'stok'          => $stok,
-            'gambar'    => $gambar
+            'gambar'        => $gambar
         );
+
+        
 
         // Kan input ke dalam table barang
         $this->model_barang->tambah_barang($data, 'tb_barang');
@@ -110,6 +127,16 @@ class Data_barang extends CI_Controller{
         // hapus_data : function
         // tb_barang  : table sesuai dengan di database
     }
+    public function detail($id_barang){
+
+        $data['barang'] = $this->model_barang->detail_brg($id_barang);
+
+        $this->load->view('templates/header');
+        $this->load->view('templates/sidebar');
+        $this->load->view('admin/detail_barang', $data);
+        $this->load->view('templates/footer');
+    }
+
     
 }
 
